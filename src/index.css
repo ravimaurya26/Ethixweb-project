@@ -1,0 +1,65 @@
+@import '@fontsource-variable/bricolage-grotesque/index.css';
+@import '@fontsource-variable/hanken-grotesk/index.css';
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Bricolage Grotesque Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-sans: 'Hanken Grotesk Variable', 'Segoe UI', system-ui, sans-serif;
+
+  --color-ink: #14161c;
+  --color-ink-soft: #4a4f5c;
+  --color-mist: #f3f4f6;
+  --color-line: #e3e5ea;
+  --color-red: #d11a2a;
+  --color-red-deep: #a10f1d;
+  --color-red-tint: #fdecee;
+  --color-wa: #1f9d55;
+
+  --breakpoint-xs: 30rem;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { font-family: var(--font-sans); color: var(--color-ink); background: #fff; line-height: 1.6; }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; line-height: 1.08; font-weight: 700; }
+  :focus-visible { outline: 3px solid var(--color-red); outline-offset: 3px; border-radius: 4px; }
+  ::selection { background: var(--color-red); color: #fff; }
+}
+
+@layer components {
+  .wrap { width: 100%; max-width: 72rem; margin-inline: auto; padding-inline: 1.25rem; }
+  @media (min-width: 48rem) { .wrap { padding-inline: 2rem; } }
+
+  .h1 { font-size: clamp(2.4rem, 7.5vw, 4.4rem); }
+  .h2 { font-size: clamp(1.8rem, 4.6vw, 2.9rem); }
+  .lead { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--color-ink-soft); max-width: 38rem; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    min-height: 3rem; padding: .75rem 1.5rem; border-radius: .75rem;
+    font-weight: 650; font-size: 1rem; text-decoration: none; cursor: pointer;
+    border: 2px solid transparent; transition: background-color .15s, color .15s, border-color .15s;
+  }
+  .btn-red { background: var(--color-red); color: #fff; }
+  .btn-red:hover { background: var(--color-red-deep); }
+  .btn-line { border-color: var(--color-ink); color: var(--color-ink); background: transparent; }
+  .btn-line:hover { background: var(--color-ink); color: #fff; }
+  .btn-white { background: #fff; color: var(--color-red-deep); }
+  .btn-white:hover { background: var(--color-red-tint); }
+  .btn[disabled] { opacity: .6; cursor: not-allowed; }
+
+  .field { display: block; width: 100%; min-height: 3rem; padding: .7rem .9rem; border-radius: .65rem;
+    border: 1.5px solid var(--color-line); background: #fff; font: inherit; color: inherit; }
+  .field:hover { border-color: #c9ccd4; }
+  .field:focus { outline: none; border-color: var(--color-red); box-shadow: 0 0 0 3px var(--color-red-tint); }
+  .field[aria-invalid='true'] { border-color: var(--color-red); }
+}
+
+/* One orchestrated moment: the hero chat plays in sequence once. */
+@keyframes bubble-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.bubble { opacity: 0; animation: bubble-in .45s ease-out forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .bubble { animation: none; opacity: 1; }
+}
